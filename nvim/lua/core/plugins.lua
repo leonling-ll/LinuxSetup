@@ -1,86 +1,79 @@
--- packer.nvim
-vim.cmd [[packadd packer.nvim]]
-return require('packer').startup(function()
-  use 'wbthomason/packer.nvim'
+-- Setup lazy.nvim
+require("lazy").setup({
+  -- spec = {
+  --   -- import your plugins
+  --   { import = "plugins" },
+  -- },
+  -- -- Configure any other settings here. See the documentation for more details.
+  -- -- colorscheme that will be used when installing plugins.
+  -- install = { colorscheme = { "habamax" } },
+  -- -- automatically check for plugin updates
+  -- checker = { enabled = true },
 
   -- starup time optimise
-  use 'dstein64/vim-startuptime'
-  use 'lewis6991/impatient.nvim'
-  use 'nathom/filetype.nvim'
-
-  -- buffer
-  use {
-    'akinsho/bufferline.nvim',
-    requires = 'nvim-tree/nvim-web-devicons'
-  }
-  use 'moll/vim-bbye' -- for more sensible delete buffer cmd
+  "dstein64/vim-startuptime",
+  "lewis6991/impatient.nvim",
+  "nathom/filetype.nvim",
 
   -- themes (disabled other themes to optimize startup time)
-  --    use 'folke/tokyonight.nvim'
-  use 'navarasu/onedark.nvim'
-  use 'rmehri01/onenord.nvim'
-  --    use { 'catppuccin/nvim', as='catppuccin' }
-  --    use { 'sonph/onehalf', rtp='vim/' }
-  --    use 'liuchengxu/space-vim-dark'
-  --    use 'ahmedabdulrahman/aylin.vim'
+  "navarasu/onedark.nvim",
+  "rmehri01/onenord.nvim",
+
+  -- buffer
+  "nvim-tree/nvim-web-devicons",
+  "akinsho/bufferline.nvim",
+  "moll/vim-bbye", -- for more sensible delete buffer cmd
 
   -- file tree
-  use {
-    'nvim-tree/nvim-tree.lua',
-    tag = "*",
-    requires = 'nvim-tree/nvim-web-devicons'
-  }
+  {
+    'stevearc/oil.nvim',
+    ---@module 'oil'
+    ---@type oil.SetupOpts
+    opts = {},
+    -- Optional dependencies
+    -- dependencies = { { "echasnovski/mini.icons", opts = {} } },
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
+    lazy = false,
+  },
 
   -- language
-  use 'neovim/nvim-lspconfig'
-  use 'glepnir/lspsaga.nvim'
-  use 'hrsh7th/cmp-nvim-lsp'
-  use 'hrsh7th/cmp-buffer'
-  use 'hrsh7th/cmp-path'
-  use 'hrsh7th/cmp-cmdline'
-  use 'hrsh7th/nvim-cmp'
-  use 'L3MON4D3/LuaSnip'
-  use 'nvim-treesitter/nvim-treesitter'
-  use 'HiPhish/nvim-ts-rainbow2'
-  use 'tell-k/vim-autopep8'
+  "neovim/nvim-lspconfig",
+  "glepnir/lspsaga.nvim",
+  "hrsh7th/cmp-nvim-lsp",
+  "hrsh7th/cmp-buffer",
+  "hrsh7th/cmp-path",
+  "hrsh7th/cmp-cmdline",
+  "hrsh7th/nvim-cmp",
+  "L3MON4D3/LuaSnip",
+  "nvim-treesitter/nvim-treesitter",
+  "HiPhish/nvim-ts-rainbow2",
+  "tell-k/vim-autopep8",
 
   -- git
-  use {
-    'lewis6991/gitsigns.nvim',
-    -- tag = 'release' -- To use the latest release (do not use this if you run Neovim nightly or dev builds!)
-  }
-  use 'apzelos/blamer.nvim'
+  "lewis6991/gitsigns.nvim",
+  "apzelos/blamer.nvim",
 
   -- status line
-  use {
-    'nvim-lualine/lualine.nvim',
-    requires = { 'nvim-tree/nvim-web-devicons', opt = true }
-  }
+  "nvim-lualine/lualine.nvim",
 
   -- tagbar
-  use 'simrat39/symbols-outline.nvim'
+  "simrat39/symbols-outline.nvim",
 
   -- floating terminal
-  use 'voldikss/vim-floaterm'
+  "voldikss/vim-floaterm",
 
   -- file telescope
-  use {
-    'nvim-telescope/telescope.nvim',
-    tag = '0.1.8',
-    requires = { {'nvim-lua/plenary.nvim'} }
-  }
+  "nvim-lua/plenary.nvim",
+  "BurntSushi/ripgrep",
+  "nvim-telescope/telescope.nvim",
 
   -- editor
-  use 'easymotion/vim-easymotion'
+  "easymotion/vim-easymotion",
 
   -- Commenter
-  use {
-    'numToStr/Comment.nvim',
-    config = function()
-      require('Comment').setup()
-    end
-  }
+  "numToStr/Comment.nvim",
 
   -- english grammar check
-  use 'rhysd/vim-grammarous'
-end)
+  "rhysd/vim-grammarous",
+})

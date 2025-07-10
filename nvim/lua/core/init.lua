@@ -8,20 +8,24 @@ vim.opt.shiftround     = true
 vim.opt.updatetime     = 100
 vim.opt.cursorline     = true
 vim.opt.autowrite      = true
-if (vim.fn.has('termguicolors') == 1) then
-  vim.opt.termguicolors = true
+if (vim.fn.has('termguicolors')) then
+    vim.opt.termguicolors = true
 end
+vim.opt.autowrite     = false
+vim.opt.wrap          = false
+vim.opt.formatoptions = ""
+vim.opt.signcolumn    = "yes" -- Prevent sign column flickering.
+
 -- tabs
 vim.opt.autoindent  = true
-vim.opt.tabstop     = 2
-vim.opt.shiftwidth  = 2
-vim.opt.softtabstop = 2
+vim.opt.tabstop     = 4
+vim.opt.shiftwidth  = 4
+vim.opt.softtabstop = 4
 vim.opt.expandtab   = true
+
 -- mouse
 vim.opt.mouse = ""
 
-require("core.keymaps")
-require("core.plugins")
 -- disable some useless standard plugins to save startup time
 -- these features have been better covered by plugins
 vim.g.loaded_matchparen        = 1
@@ -39,9 +43,31 @@ vim.g.loaded_netrwPlugin       = 1
 vim.g.loaded_tutor_mode_plugin = 1
 vim.g.loaded_remote_plugins    = 1
 
--- On StartUp
-local filetree                 = require('configs.filetree')
-vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = filetree.open_nvim_tree })
+-- Bootstrap lazy.nvim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+      { out, "WarningMsg" },
+      { "\nPress any key to exit..." },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
+  end
+end
+vim.opt.rtp:prepend(lazypath)
+
+-- Make sure to setup `mapleader` and `maplocalleader` before
+-- loading lazy.nvim so that mappings are correct.
+-- This is also a good place to setup other settings (vim.opt)
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+
+require("core.plugins")
+require("core.gui")
 
 if (vim.fn.exists('g:vscode') == 1) then
   -- use default theme for vscode mode
@@ -64,3 +90,5 @@ require("configs.outlinetree").config()
 require("configs.git").config()
 require("configs.bufferline").config()
 require("configs.grammar").config()
+
+require("core.keymaps")

@@ -9,3 +9,4 @@ else
     set dictionary+=~/AppData/Local/nvim/words
 endif
 
+autocmd FileType markdown setlocal spell
