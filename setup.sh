@@ -35,8 +35,24 @@ print_section() {
     echo -e "${GREEN}========================================${NC}\n"
 }
 
+# Function to check if running in Docker container
+is_docker() {
+    if [ -f /.dockerenv ]; then
+        return 0
+    elif grep -sq 'docker\|lxc' /proc/1/cgroup 2>/dev/null; then
+        return 0
+    else
+        return 1
+    fi
+}
+
 # Function to check if running as root
 check_not_root() {
+    if is_docker; then
+        print_info "Running in Docker container, skipping root check"
+        return 0
+    fi
+    
     if [ "$EUID" -eq 0 ]; then
         print_error "Please do not run this script as root. It will use sudo when needed."
         exit 1
@@ -259,15 +275,14 @@ show_menu() {
     echo -e "${BLUE}Linux Development Environment Setup${NC}"
     echo -e "${BLUE}========================================${NC}\n"
     echo "1) Install Basic Software"
-    echo "2) Setup SSH Server"
-    echo "3) Install ZSH"
-    echo "4) Install Oh-My-Zsh"
-    echo "5) Install ZSH Plugins"
-    echo "6) Set ZSH Theme (ys)"
-    echo "7) Install Tmux Powerline"
-    echo "8) Install Powerline Fonts"
-    echo "9) Configure Tmux"
-    echo "10) Run All Setup Steps"
+    echo "2) Install ZSH"
+    echo "3) Install Oh-My-Zsh"
+    echo "4) Install ZSH Plugins"
+    echo "5) Set ZSH Theme (ys)"
+    echo "6) Install Tmux Powerline"
+    echo "7) Install Powerline Fonts"
+    echo "8) Configure Tmux"
+    echo "9) Run All Setup Steps"
     echo "0) Exit"
     echo ""
 }
@@ -277,7 +292,6 @@ run_all_steps() {
     print_section "Running Complete Setup"
     
     install_basic_software
-    setup_ssh_server
     install_zsh
     install_oh_my_zsh
     install_zsh_plugins
@@ -309,15 +323,14 @@ main() {
         
         case $choice in
             1) install_basic_software ;;
-            2) setup_ssh_server ;;
-            3) install_zsh ;;
-            4) install_oh_my_zsh ;;
-            5) install_zsh_plugins ;;
-            6) set_zsh_theme ;;
-            7) install_powerline ;;
-            8) install_powerline_fonts ;;
-            9) configure_tmux ;;
-            10) run_all_steps; break ;;
+            2) install_zsh ;;
+            3) install_oh_my_zsh ;;
+            4) install_zsh_plugins ;;
+            5) set_zsh_theme ;;
+            6) install_powerline ;;
+            7) install_powerline_fonts ;;
+            8) configure_tmux ;;
+            9) run_all_steps; break ;;
             0) print_info "Exiting..."; exit 0 ;;
             *) print_error "Invalid option. Please try again." ;;
         esac
