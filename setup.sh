@@ -154,7 +154,15 @@ install_zsh_plugins() {
         print_info "Installing autojump..."
         git clone https://github.com/wting/autojump.git "$ZSH_CUSTOM/plugins/autojump"
         cd "$ZSH_CUSTOM/plugins/autojump"
-        ./install.py
+        
+        # Set SHELL variable if not set (common in Docker containers)
+        if [ -z "$SHELL" ] || [ "$SHELL" = "None" ]; then
+            export SHELL=$(which zsh)
+            print_info "Setting SHELL to $SHELL for autojump installation"
+        fi
+        
+        # Install autojump with explicit shell specification
+        ./install.py --force
         cd - > /dev/null
         print_success "autojump installed!"
     fi
