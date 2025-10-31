@@ -2,6 +2,15 @@
 
 This repo includes basic configuration of setup Linux development environment.
 
+## TLDR
+
+```shell
+git clone https://github.com/leonling-ll/LinuxSetup.git
+cd LinuxSetup && ./setup.py --all
+```
+
+If you want to see what will be installed, please follow the steps below.
+
 ## Softwares to install at first
 
 ```shell
