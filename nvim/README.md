@@ -4,22 +4,27 @@ This config is a folk of [leslie255/nvim-config](https://github.com/leslie255/nv
 
 ## Setup
 0. Use the latest version of NVIM(0.10.0+)
-Since ubuntu package management tool does not install the lastet neovim, we should download it from [github nvim v0.10.4 release](https://github.com/neovim/neovim/releases/tag/v0.10.4).
+Since ubuntu package management tool does not install the lastet neovim, we should download it from [github nvim v0.11.5 release](https://github.com/neovim/neovim/releases/tag/v0.11.5).
 ```shell
-wget https://github.com/neovim/neovim/releases/download/v0.10.4/nvim-linux-x86_64.tar.gz
-tar xzvf nvim-linux-x86_64.tar.gz
-./nvim-linux64/bin/nvim
+wget https://github.com/neovim/neovim/releases/download/v0.11.5/nvim-linux-x86_64.tar.gz -O $HOME/nvim-linux-x86_64.tar.gz
+tar xzvf $HOME/nvim-linux-x86_64.tar.gz -C $HOME
+rm $HOME/nvim-linux-x86_64.tar.gz
+```
+Set nvim to zsh alias
+```shell
+echo 'alias nvim="$HOME/nvim-linux-x86_64/bin/nvim"' >> ~/.zshrc
 ```
 
 1. Clone or link this folder to `~/.config/nvim`:
 ```shell
-$ ln -s /path/to/LinuxSetup/nvim ~/.config/nvim
+$ ln -s $HOME/LinuxSetup/nvim ~/.config/nvim
 ```
 
-2. When you first enter `nvim`, you will see a bunch of mess because the plugins aren't installed yet, so run `:PackerInstall` to install the plugins<br>
-> Note that there is a chance that the download would timeout and `packer.nvim` would report install failed, in this case run `:PackerInstall` again
+2. ~~When you first enter `nvim`, you will see a bunch of mess because the plugins aren't installed yet, so run `:PackerInstall` to install the plugins<br>~~
+> ~~Note that there is a chance that the download would timeout and `packer.nvim` would report install failed, in this case run `:PackerInstall` again~~
+2. Now we have adopted `lazyInstall` for all plugins. All plugins will be auto-installed when launch `nvim` fist time.
 
-4. This setup uses the modern LSP system for langauge support, things like auto-complete, symbols tree, etc..., **which requires a LSP server outside the editor**. Fortunately [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) manages to configure most of the LSP server options for us, all we need to do is to install the LSP servers themselves:<br>
+3. This setup uses the modern LSP system for langauge support, things like auto-complete, symbols tree, etc..., **which requires a LSP server outside the editor**. Fortunately [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) manages to configure most of the LSP server options for us, all we need to do is to install the LSP servers themselves:<br>
 In `lua/configs/autocomplete.lua`, line `51`, edit the list of LSP servers, a complete list of supported LSP servers is listed [here](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md). After that install the corresponding servers on your OS, auto-complete should pop up for supported languages now :)
   * Install [clangd](https://clangd.llvm.org/installation.html)
     ```shell
@@ -39,7 +44,7 @@ The default vim regex-based highlighting is pretty lame, for NVIM, [treesitter](
 You can use the `:TSInstall <lang>` command to install a parser for a language<br>
 Alternatively, in `lua/configs/treesitter.lua`, line `6`, you can have a list of parsers that will be updated everytime you use the `:TSUpdate` or `:TSUpdateSync` command (the latter is for synchronized updating), or you can just install all maintained parsers by uncommenting line `5` and commenting line `6`
 
-6. To make `Telescope` can be fully worked.
+5. To make `Telescope` can be fully worked.
 `conda install -c conda-forge ripgrep` to install `ripgrep` and which `live_grep` depends on.
 
 ## Plugins
