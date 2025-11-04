@@ -18,6 +18,9 @@ require("lazy").setup({
   -- themes (disabled other themes to optimize startup time)
   "navarasu/onedark.nvim",
   "rmehri01/onenord.nvim",
+  "folke/tokyonight.nvim",
+  "AlexvZyl/nordic.nvim",
+  "rebelot/kanagawa.nvim",
 
   -- buffer
   "nvim-tree/nvim-web-devicons",
