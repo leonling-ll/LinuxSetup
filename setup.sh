@@ -72,11 +72,11 @@ install_basic_software() {
     print_info "Installing basic development tools..."
     sudo apt install -y vim git tmux curl wget python-is-python3
     
-    print_info "Installing C/C++ development tools..."
-    sudo apt install -y gcc g++ ccls
+    # print_info "Installing C/C++ development tools..."
+    # sudo apt install -y gcc g++ ccls
     
-    print_info "Installing system monitoring tools..."
-    sudo apt install -y htop
+    # print_info "Installing system monitoring tools..."
+    # sudo apt install -y htop
     
     print_success "Basic software installation completed!"
 }
@@ -273,8 +273,8 @@ configure_tmux() {
 # Set tmux mode to vi (default is emac)
 set-window-option -g mode-keys vi
 EOF
-        print_success "Tmux configured with Powerline!"
-    fi
+#        print_success "Tmux configured with Powerline!"
+#     fi
 }
 
 # Main menu
