@@ -262,13 +262,13 @@ configure_tmux() {
     print_info "Adding powerline configuration to tmux..."
     
     # Check if powerline config already exists
-    if [ -f "$TMUX_CONF" ] && grep -q "powerline-config tmux setup" "$TMUX_CONF"; then
-        print_warning "Powerline configuration already exists in .tmux.conf"
-    else
-        cat >> "$TMUX_CONF" << 'EOF'
+    # if [ -f "$TMUX_CONF" ] && grep -q "powerline-config tmux setup" "$TMUX_CONF"; then
+    #     print_warning "Powerline configuration already exists in .tmux.conf"
+    # else
+    #     cat >> "$TMUX_CONF" << 'EOF'
 
 # enable the powerline status bar
-run-shell 'powerline-config tmux setup'
+# run-shell 'powerline-config tmux setup'
 
 # Set tmux mode to vi (default is emac)
 set-window-option -g mode-keys vi
@@ -304,8 +304,8 @@ run_all_steps() {
     install_oh_my_zsh
     install_zsh_plugins
     set_zsh_theme
-    install_powerline
-    install_powerline_fonts
+    # install_powerline
+    # install_powerline_fonts
     configure_tmux
     
     print_section "Setup Complete!"
