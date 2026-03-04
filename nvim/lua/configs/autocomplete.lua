@@ -21,11 +21,7 @@ function M.config()
       ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
       ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
       ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-      ['<C-y>'] = cmp.config.disable,
-      ['<C-e>'] = cmp.mapping({
-        i = cmp.mapping.abort(),
-        c = cmp.mapping.close(),
-      }),
+      ['<C-e>'] = cmp.mapping.abort(),
       -- Accept currently selected item...
       -- Set `select` to `false` to only confirm explicitly selected items:
       ['<CR>'] = cmp.mapping.confirm({ select = true }),
@@ -104,13 +100,7 @@ function M.config()
   -- nvim-lspconfig config
   -- List of all pre-configured LSP servers:
   -- github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-  require 'lspconfig'.gopls.setup {}
-  local servers = { 'clangd', 'html', 'rust_analyzer', 'pylsp', 'lua_ls' }
-  for _, lsp in pairs(servers) do
-    require('lspconfig')[lsp].setup {
-      on_attach = on_attach
-    }
-  end
+  vim.lsp.enable({ 'gopls', 'clangd', 'html', 'rust_analyzer', 'pylsp', 'lua_ls' })
 
   local devicons = require('nvim-web-devicons')
   cmp.register_source('devicons', {
@@ -133,65 +123,56 @@ function M.config()
   --local kind = require('lspsaga.lspkind')
   --kind[type_number][2] = icon -- see lua/lspsaga/lspkind.lua
 
-  -- use default config
   saga.setup({
-    border_style = "single",
-    saga_winblend = 0,
-    move_in_saga = { prev = '<C-p>', next = '<C-n>' },
-    diagnostic_header = { " ", " ", " ", "ﴞ " },
-    show_diagnostic_source = true,
-    diagnostic_source_bracket = {},
-    max_preview_lines = 10,
-    code_action_icon = "",
-    code_action_num_shortcut = true,
-    code_action_lightbulb = {
+    ui = {
+      border = "single",
+      code_action = "",
+    },
+    lightbulb = {
       enable = true,
       sign = true,
-      enable_in_insert = true,
-      sign_priority = 20,
       virtual_text = true,
+      sign_priority = 20,
     },
-    finder_icons = {
-      def = '  ',
-      ref = '諭 ',
-      link = '  ',
+    diagnostic = {
+      diagnostic_only_current = false,
     },
-    finder_request_timeout = 1500,
-    finder_action_keys = {
-      open = "o",
-      vsplit = "s",
-      split = "i",
-      tabe = "t",
-      quit = "q",
-      scroll_down = "<C-f>",
-      scroll_up = "<C-b>", -- quit can be a table
+    finder = {
+      max_height = 0.6,
+      keys = {
+        open = "o",
+        vsplit = "s",
+        split = "i",
+        tabnew = "t",
+        quit = "q",
+        scroll_down = "<C-f>",
+        scroll_up = "<C-b>",
+      },
     },
-    code_action_keys = {
-      quit = "q",
-      exec = "<CR>",
+    code_action = {
+      num_shortcut = true,
+      keys = {
+        quit = "q",
+        exec = "<CR>",
+      },
     },
-    rename_action_quit = "q",
-    rename_in_select = true,
-    definition_preview_icon = "  ",
-    -- show symbols in winbar must nightly
-    symbol_in_winbar = {
-      in_custom = false,
-      enable = false,
-      separator = ' ',
-      show_file = true,
-      click_support = false,
+    rename = {
+      keys = {
+        quit = "q",
+      },
     },
-    show_outline = {
-      win_position = 'right',
-      win_with = '',
+    outline = {
+      win_position = "right",
       win_width = 30,
-      auto_enter = true,
       auto_preview = true,
-      virt_text = '┃',
-      jump_key = 'o',
+      jump_key = "o",
       auto_refresh = true,
     },
-    server_filetype_map = {},
+    symbol_in_winbar = {
+      enable = false,
+      separator = " ",
+      show_file = true,
+    },
   })
 
 
