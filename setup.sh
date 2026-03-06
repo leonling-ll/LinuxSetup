@@ -240,42 +240,6 @@ install_powerline_fonts() {
     print_success "Powerline fonts installed!"
 }
 
-# Function to configure tmux
-configure_tmux() {
-    print_section "Configuring Tmux"
-    
-    TMUX_CONF="$HOME/.tmux.conf"
-    
-    if [ -f "$TMUX_CONF" ]; then
-        print_warning "Tmux configuration file already exists"
-        read -p "Do you want to backup and update it? (y/n) " -n 1 -r
-        echo
-        if [[ $REPLY =~ ^[Yy]$ ]]; then
-            cp "$TMUX_CONF" "$TMUX_CONF.backup.$(date +%Y%m%d_%H%M%S)"
-            print_info "Backed up existing tmux configuration"
-        else
-            print_info "Skipping tmux configuration"
-            return
-        fi
-    fi
-    
-    print_info "Adding powerline configuration to tmux..."
-    
-    # Check if powerline config already exists
-    # if [ -f "$TMUX_CONF" ] && grep -q "powerline-config tmux setup" "$TMUX_CONF"; then
-    #     print_warning "Powerline configuration already exists in .tmux.conf"
-    # else
-    #     cat >> "$TMUX_CONF" << 'EOF'
-
-# enable the powerline status bar
-# run-shell 'powerline-config tmux setup'
-
-# Set tmux mode to vi (default is emac)
-set-window-option -g mode-keys vi
-EOF
-#        print_success "Tmux configured with Powerline!"
-#     fi
-}
 
 # Main menu
 show_menu() {
@@ -289,7 +253,6 @@ show_menu() {
     echo "5) Set ZSH Theme (ys)"
     echo "6) Install Tmux Powerline"
     echo "7) Install Powerline Fonts"
-    echo "8) Configure Tmux"
     echo "9) Run All Setup Steps"
     echo "0) Exit"
     echo ""
@@ -337,7 +300,6 @@ main() {
             5) set_zsh_theme ;;
             6) install_powerline ;;
             7) install_powerline_fonts ;;
-            8) configure_tmux ;;
             9) run_all_steps; break ;;
             0) print_info "Exiting..."; exit 0 ;;
             *) print_error "Invalid option. Please try again." ;;

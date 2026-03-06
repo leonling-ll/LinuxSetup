@@ -73,11 +73,10 @@ if (vim.fn.exists('g:vscode') == 1) then
   -- use default theme for vscode mode
   require("onedark").setup()
 else
-  -- require("theme.github_dark").config()
   -- require("theme.onedark").config()
   -- require("onenord").setup()
-  require("tokyonight").setup()
-  -- require("nordic").setup()
+  require("onedark").setup()
+  -- require("tokyonight").setup()
 end
 
 -- Load plugin configs
