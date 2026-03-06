@@ -33,8 +33,8 @@ vim.keymap.set("n", "<leader>bp", ":bp<cr>")
 vim.keymap.set("n", "<leader>bd", ":Bdelete<cr>")
 
 -- p: plugins
-vim.keymap.set("n", "<leader>pi", ":PackerInstall<cr>")
-vim.keymap.set("n", "<leader>pc", ":PackerClean<cr>")
+vim.keymap.set("n", "<leader>pi", ":Lazy install<cr>")
+vim.keymap.set("n", "<leader>pc", ":Lazy clean<cr>")
 
 -- s: search
 vim.keymap.set("n", "<leader>ss", "/")

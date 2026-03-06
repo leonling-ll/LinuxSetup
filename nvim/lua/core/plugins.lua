@@ -10,11 +10,6 @@ require("lazy").setup({
   -- -- automatically check for plugin updates
   -- checker = { enabled = true },
 
-  -- starup time optimise
-  "dstein64/vim-startuptime",
-  "lewis6991/impatient.nvim",
-  "nathom/filetype.nvim",
-
   -- themes (disabled other themes to optimize startup time)
   "navarasu/onedark.nvim",
   "rmehri01/onenord.nvim",
@@ -50,7 +45,6 @@ require("lazy").setup({
   "hrsh7th/nvim-cmp",
   "L3MON4D3/LuaSnip",
   "nvim-treesitter/nvim-treesitter",
-  "HiPhish/nvim-ts-rainbow2",
   "tell-k/vim-autopep8",
 
   -- git
