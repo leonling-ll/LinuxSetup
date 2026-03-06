@@ -84,8 +84,8 @@ vim.keymap.set("n", "<leader>tn", ":FloatermNew<cr>")
 -- b: git blamer
 vim.keymap.set("n", "<leader>gb", ":BlamerToggle<cr>")
 
--- e: esymotion
-vim.keymap.set("n", "<leader>e", "<Plug>(easymotion-s2)")
+-- e: easymotion
+vim.keymap.set("n", "<leader>em", "<Plug>(easymotion-s2)")
 
 -- clang-format
 -- vim.keymap.set("n", "<C-K>", ":pyf ~/devenvs/LinuxSetup/vim/.vim/tools/clang-format.py<cr>")
