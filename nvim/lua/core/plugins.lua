@@ -54,8 +54,17 @@ require("lazy").setup({
   -- status line
   "nvim-lualine/lualine.nvim",
 
-  -- tagbar
-  "simrat39/symbols-outline.nvim",
+  -- tagbar (monkey-patch deprecated vim.lsp.buf_get_clients for nvim 0.10+)
+  {
+    "simrat39/symbols-outline.nvim",
+    config = function()
+      -- vim.lsp.buf_get_clients() is deprecated; always shim it
+      vim.lsp.buf_get_clients = function(bufnr)
+        return vim.lsp.get_clients({ bufnr = bufnr })
+      end
+      require("symbols-outline").setup()
+    end,
+  },
 
   -- floating terminal
   "voldikss/vim-floaterm",

@@ -74,8 +74,8 @@ if (vim.fn.exists('g:vscode') == 1) then
   require("onedark").setup()
 else
   -- require("theme.onedark").config()
-  -- require("onenord").setup()
-  require("onedark").setup()
+  require("onenord").setup()
+  -- require("onedark").setup()
   -- require("tokyonight").setup()
 end
 
