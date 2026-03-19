@@ -90,6 +90,14 @@ sudo apt install htop
 
 * `Oh-My-Zsh` also provides various themes, `ys` is the best for me.
 
+## Git Pretty log
+
+Set alias for log prettify syntax
+
+```shell
+git config --global alias.logline "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+```
+
 ## Beatify
 
 ### Tmux Powerline

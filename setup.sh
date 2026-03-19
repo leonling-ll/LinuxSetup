@@ -42,6 +42,7 @@ install_basic_software() {
     sudo apt update
     sudo apt upgrade -y
     sudo apt install -y vim git tmux curl wget python-is-python3
+    git config --global alias.logline "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
     print_success "Basic software installation completed!"
 }
 
