@@ -31,7 +31,7 @@ else
 fi
 
 # Add alias to ~/.zshrc if not already present
-if [ -f "$HOME/.zshrc" ] && ! grep -qF 'nvim-linux-x86_64/bin/nvim' "$HOME/.zshrc"; then
+if [ -f "$HOME/.zshrc" ] && ! grep -qF "$HOME/nvim-linux-x86_64/bin/nvim" "$HOME/.zshrc"; then
     echo "" >> "$HOME/.zshrc"
     echo "# NeoVim alias" >> "$HOME/.zshrc"
     echo "$ALIAS_LINE" >> "$HOME/.zshrc"
